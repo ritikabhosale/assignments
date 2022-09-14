@@ -17,4 +17,10 @@ class RectangleTest {
         Rectangle rectangle = new Rectangle(3, 4);
         assertEquals(rectangle.perimeter(), 14);
     }
+
+    @Test
+    void calculatePerimeterForFloatingDimensions() {
+        Rectangle rectangle = new Rectangle(2.5, 3.2);
+        assertEquals(rectangle.perimeter(), 11.4);
+    }
 }
