@@ -1,4 +1,4 @@
-package com.tw.step.rectangle;
+package com.tw.step.shapes;
 
 public class Main {
     public static void main(String[] args) {

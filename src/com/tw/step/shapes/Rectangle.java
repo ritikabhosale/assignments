@@ -1,4 +1,4 @@
-package com.tw.step.rectangle;
+package com.tw.step.shapes;
 
 public class Rectangle {
 
@@ -9,7 +9,6 @@ public class Rectangle {
         this.width = width;
         this.length = length;
     }
-
 
     public double area() {
         return  this.length * this.width;

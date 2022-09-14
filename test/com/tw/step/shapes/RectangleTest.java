@@ -1,4 +1,4 @@
-package com.tw.step.rectangle;
+package com.tw.step.shapes;
 
 import org.junit.jupiter.api.Test;
 
