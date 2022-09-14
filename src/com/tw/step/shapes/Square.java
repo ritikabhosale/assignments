@@ -1,6 +1,6 @@
 package com.tw.step.shapes;
 
-public class Square {
+public class Square implements Shapes{
 
     private final double side;
 
@@ -8,10 +8,12 @@ public class Square {
         this.side = side;
     }
 
+    @Override
     public double area() {
         return this.side * this.side;
     }
 
+    @Override
     public double perimeter() {
         return this.side * 4;
     }
