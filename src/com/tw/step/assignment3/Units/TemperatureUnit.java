@@ -1,7 +1,7 @@
 package com.tw.step.assignment3.Units;
 
 public enum TemperatureUnit implements Unit {
-    CELSIUS(1), FAHRENHEIT(0.47);
+    CELSIUS(1), FAHRENHEIT(100/212d);
 
     private final double inBase;
 
