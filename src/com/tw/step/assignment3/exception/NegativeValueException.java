@@ -1,9 +1,9 @@
 package com.tw.step.assignment3.exception;
 
-public class NegativeLengthException extends Throwable {
+public class NegativeValueException extends Throwable {
     private final double length;
 
-    public NegativeLengthException(double value) {
+    public NegativeValueException(double value) {
         this.length = value;
     }
 
