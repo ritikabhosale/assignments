@@ -17,4 +17,12 @@ class LengthTest {
         Length length2 = Length.createLength(1, LengthUnit.INCH);
         assertEquals(0, length1.compare(length2));
     }
+
+    @Test
+    void shouldCompareLengthOfDifferentUnits() throws NegativeLengthException {
+        Length length1 = Length.createLength(1, LengthUnit.INCH);
+        Length length2 = Length.createLength(2, LengthUnit.FEET);
+        length1.compare(length2);
+        assertEquals(-1, length1.compare(length2));
+    }
 }

@@ -44,7 +44,11 @@ public class Length {
         if (this.unit == length.unit) {
             return compareValue(this.value, length.value);
         }
-        return -1;
+
+        double valueInCmOfLength1 = this.unit.inCentimeters() * this.value;
+        double valueInCmOfLength2 = length.unit.inCentimeters() * length.value;
+
+        return compareValue(valueInCmOfLength1, valueInCmOfLength2);
     }
 
     private static int compareValue(double value1, double value2) {
