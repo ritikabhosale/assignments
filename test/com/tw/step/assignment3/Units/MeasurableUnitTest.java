@@ -91,4 +91,47 @@ class MeasurableUnitTest {
 
         assertThrows(IncompatibleUnitsException.class,()-> volumeInLiter.compare(lengthInInches));
     }
+
+    @Test
+    void shouldAddTwoSameUnitLengthsInInches() throws NegativeValueException, IncompatibleUnitsException {
+        MeasurableUnit length1 = MeasurableUnit.createMeasurableUnit(1, LengthUnit.INCH);
+        MeasurableUnit length2 = MeasurableUnit.createMeasurableUnit(1, LengthUnit.INCH);
+
+        assertEquals(MeasurableUnit.createMeasurableUnit(2, LengthUnit.INCH),length1.add(length2));
+    }
+
+    @Test
+    void shouldAddTwoDifferentUnitLengthsInInches() throws NegativeValueException, IncompatibleUnitsException {
+        MeasurableUnit length1 = MeasurableUnit.createMeasurableUnit(2, LengthUnit.INCH);
+        MeasurableUnit length2 = MeasurableUnit.createMeasurableUnit(2.5, LengthUnit.CM);
+
+        assertEquals(MeasurableUnit.createMeasurableUnit(3, LengthUnit.INCH),length1.add(length2));
+    }
+
+    @Test
+    void shouldAddTwoDifferentUnitVolumeInLiter() throws NegativeValueException, IncompatibleUnitsException {
+        MeasurableUnit volumeInLiter = MeasurableUnit.createMeasurableUnit(1, VolumeUnit.LITER);
+        MeasurableUnit volumeInGallon = MeasurableUnit.createMeasurableUnit(1, VolumeUnit.GALLON);
+
+        MeasurableUnit addedVolume = volumeInLiter.add(volumeInGallon);
+        MeasurableUnit expectedVolume = MeasurableUnit.createMeasurableUnit(4.78, VolumeUnit.LITER);
+
+        assertTrue(addedVolume.isAlmostEqual(expectedVolume, 0.01));
+    }
+
+    @Test
+    void shouldThrowExceptionForIncompatibleUnitsWhileAdding() throws NegativeValueException {
+        MeasurableUnit volumeInLiter = MeasurableUnit.createMeasurableUnit(3.78, VolumeUnit.LITER);
+        MeasurableUnit lengthInInches = MeasurableUnit.createMeasurableUnit(2, LengthUnit.INCH);
+
+        assertThrows(IncompatibleUnitsException.class,()-> volumeInLiter.compare(lengthInInches));
+    }
+
+    @Test
+    void shouldCompareTemperatureInCelsiusAndFahrenheitIfTemperatureInCelsiusIsGreater() throws NegativeValueException, IncompatibleUnitsException {
+        MeasurableUnit tempInCelsius = MeasurableUnit.createMeasurableUnit(110, TemperatureUnit.CELSIUS);
+        MeasurableUnit tempInFahrenheit = MeasurableUnit.createMeasurableUnit(212, TemperatureUnit.FAHRENHEIT);
+
+        assertEquals(1, tempInCelsius.compare(tempInFahrenheit));
+    }
 }

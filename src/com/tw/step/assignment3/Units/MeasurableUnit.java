@@ -3,6 +3,8 @@ package com.tw.step.assignment3.Units;
 import com.tw.step.assignment3.exception.IncompatibleUnitsException;
 import com.tw.step.assignment3.exception.NegativeValueException;
 
+import java.util.Objects;
+
 public class MeasurableUnit {
 
     private final double value;
@@ -29,15 +31,31 @@ public class MeasurableUnit {
     public int compare(MeasurableUnit otherUnit) throws IncompatibleUnitsException {
         validateSameUnits(otherUnit.unit);
 
-        double valueInCmOfLength1 = this.unit.toBase(this.value);
-        double valueInCmOfLength2 = otherUnit.unit.toBase(otherUnit.value);
+        double valueInBaseOfUnit1 = this.unit.toBase(this.value);
+        double valueInBaseOfUnit2 = otherUnit.unit.toBase(otherUnit.value);
 
-        if (valueInCmOfLength1 > valueInCmOfLength2) {
+        if (valueInBaseOfUnit1 > valueInBaseOfUnit2) {
             return 1;
-        } else if (valueInCmOfLength1 < valueInCmOfLength2) {
+        } else if (valueInBaseOfUnit1 < valueInBaseOfUnit2) {
             return -1;
         }
         return 0;
+    }
+
+    public MeasurableUnit add(MeasurableUnit otherUnit) throws IncompatibleUnitsException, NegativeValueException {
+        validateSameUnits(otherUnit.unit);
+
+        double valueInBaseOfUnit1 = this.unit.toBase(this.value);
+        double valueInBaseOfUnit2 = otherUnit.unit.toBase(otherUnit.value);
+
+        double addedValue = valueInBaseOfUnit1 + valueInBaseOfUnit2;
+        Unit unitType = this.unit.baseUnit();
+
+        return createMeasurableUnit(addedValue, unitType);
+    }
+
+    public boolean isAlmostEqual(MeasurableUnit expectedVolume, double delta) {
+        return Math.abs(this.value - expectedVolume.value) < delta;
     }
 
     @Override
@@ -45,10 +63,10 @@ public class MeasurableUnit {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MeasurableUnit length = (MeasurableUnit) o;
+        MeasurableUnit that = (MeasurableUnit) o;
 
-        if (Double.compare(length.value, value) != 0) return false;
-        return unit == length.unit;
+        if (Double.compare(that.value, value) != 0) return false;
+        return Objects.equals(unit, that.unit);
     }
 
     @Override

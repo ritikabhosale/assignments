@@ -4,4 +4,6 @@ public interface Unit {
     double toBase(double value);
 
     boolean isUnitCompatible(Unit unit);
+
+    Unit baseUnit();
 }

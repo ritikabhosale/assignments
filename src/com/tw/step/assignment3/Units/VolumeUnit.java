@@ -18,4 +18,9 @@ public enum VolumeUnit implements Unit {
     public boolean isUnitCompatible(Unit unit) {
         return unit instanceof VolumeUnit;
     }
+
+    @Override
+    public Unit baseUnit() {
+        return VolumeUnit.LITER;
+    }
 }

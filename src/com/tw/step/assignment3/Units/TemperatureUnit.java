@@ -1,26 +1,26 @@
 package com.tw.step.assignment3.Units;
 
-public enum LengthUnit implements Unit {
-    FEET(12), INCH(1), MM(0.04), CM(0.4);
+public enum TemperatureUnit implements Unit {
+    CELSIUS(1), FAHRENHEIT(0.47);
 
     private final double inBase;
 
-    LengthUnit(double inBase) {
+    TemperatureUnit(double inBase) {
         this.inBase = inBase;
     }
 
     @Override
     public double toBase(double value) {
-        return value * this.inBase;
+        return this.inBase * value;
     }
 
     @Override
     public boolean isUnitCompatible(Unit unit) {
-        return unit instanceof LengthUnit;
+        return unit instanceof TemperatureUnit;
     }
 
     @Override
     public Unit baseUnit() {
-        return LengthUnit.INCH;
+        return TemperatureUnit.CELSIUS;
     }
 }
