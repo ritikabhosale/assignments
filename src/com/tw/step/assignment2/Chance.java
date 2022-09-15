@@ -3,6 +3,8 @@ package com.tw.step.assignment2;
 import com.tw.step.assignment2.exception.InvalidProbabilityException;
 
 public class Chance {
+    public static final int IMPOSSIBILITY = 0;
+    public static final int CERTAINTY = 1;
     private final double probability;
 
     private Chance(double probability) {
@@ -10,7 +12,7 @@ public class Chance {
     }
 
     public static Chance createChance(double probability) throws InvalidProbabilityException {
-        if (probability >= 0 && probability <= 1) {
+        if (probability >= IMPOSSIBILITY && probability <= CERTAINTY) {
             return new Chance(probability);
         }
         throw new InvalidProbabilityException(probability);
@@ -20,11 +22,14 @@ public class Chance {
         return new Chance(1 - this.probability);
     }
 
-    public Chance combineChance(Chance chance) {
-        double probability = this.probability * chance.probability;
+    public Chance and(Chance otherChance) {
+        double probability = this.probability * otherChance.probability;
         return new Chance(probability);
     }
 
+    public Chance or(Chance otherChance) {
+        return this.not().and(otherChance.not()).not();
+    }
 
     @Override
     public boolean equals(Object o) {

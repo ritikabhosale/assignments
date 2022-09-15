@@ -8,41 +8,45 @@ import static org.junit.jupiter.api.Assertions.*;
 class ChanceTest {
 
     @Test
-    void not() throws InvalidProbabilityException {
+    void shouldCreateANewChance() throws InvalidProbabilityException {
+        Chance chance = Chance.createChance(0.75);
+        assertEquals(chance, chance);
+    }
+
+    @Test
+    void shouldCreateNotOfAChance() throws InvalidProbabilityException {
         Chance chance = Chance.createChance(0.75);
         Chance notOfChance = chance.not();
-        assertTrue(notOfChance.equals(Chance.createChance(0.25)));
+
+        assertEquals(notOfChance, Chance.createChance(0.25));
     }
 
     @Test
-    void notShouldReturnFalse() throws InvalidProbabilityException {
-        Chance chance = Chance.createChance(0.75);
-        Chance notOfChance = chance.not();
-        assertFalse(notOfChance.equals(Chance.createChance(0.35)));
+    void shouldThrowOnCreatingInvalidChance() {
+        assertThrows(InvalidProbabilityException.class, () -> Chance.createChance(1.2));
     }
 
     @Test
-    void createChance() throws InvalidProbabilityException {
-        Chance chance = Chance.createChance(0.75);
-        assertTrue(chance.equals(chance));
+    void shouldReturnChanceOfGettingTails() throws InvalidProbabilityException {
+        Chance chanceOfGettingOneOnDice = Chance.createChance(1/6d);
+        Chance chanceOfGettingATail = Chance.createChance(0.5);
+
+        Chance chance = chanceOfGettingOneOnDice.and(chanceOfGettingATail);
+        assertEquals(chance, Chance.createChance(1/12d));
     }
 
     @Test
-    void createChanceShouldThrowException() {
-        try {
-            Chance chance = Chance.createChance(1.2);
-        } catch (InvalidProbabilityException e) {
-            String expected = "Probability should be between 0-1, invalid 1.2";
-            assertEquals(expected, e.getMessage());
-        }
+    void shouldReturnFalseOnWrongComplimentOfChance() throws InvalidProbabilityException {
+        Chance chanceOfGettingOneOnDice = Chance.createChance(1/6d);
+        Chance chanceOfNotGettingOneOnADice = chanceOfGettingOneOnDice.not();
+
+        assertNotEquals(chanceOfNotGettingOneOnADice, Chance.createChance(0.35));
     }
 
     @Test
-    void combineChanceOfGettingAllTails() throws InvalidProbabilityException {
-        Chance chance1 = Chance.createChance(0.5);
-        Chance chance2 = Chance.createChance(0.5);
+    void shouldReturnChanceOfAtLeastOneTail() throws InvalidProbabilityException {
+        Chance chanceOfGettingTailOnACoin = Chance.createChance(0.5);
 
-        Chance chance = chance1.combineChance(chance2);
-        assertTrue(chance.equals(Chance.createChance(0.25)));
+        assertEquals(chanceOfGettingTailOnACoin.or(chanceOfGettingTailOnACoin), Chance.createChance(0.75));
     }
 }
