@@ -19,6 +19,18 @@ public class Length {
         return new Length(value, unit);
     }
 
+    public int compare(Length length) {
+        double valueInCmOfLength1 = this.unit.inCentimeters(this.value);
+        double valueInCmOfLength2 = length.unit.inCentimeters(length.value);
+
+        if (valueInCmOfLength1 > valueInCmOfLength2) {
+            return 1;
+        } else if (valueInCmOfLength1 < valueInCmOfLength2) {
+            return -1;
+        }
+        return 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,25 +50,5 @@ public class Length {
         result = (int) (temp ^ (temp >>> 32));
         result = 31 * result + (unit != null ? unit.hashCode() : 0);
         return result;
-    }
-
-    public int compare(Length length) {
-        if (this.unit == length.unit) {
-            return compareValue(this.value, length.value);
-        }
-
-        double valueInCmOfLength1 = this.unit.inCentimeters() * this.value;
-        double valueInCmOfLength2 = length.unit.inCentimeters() * length.value;
-
-        return compareValue(valueInCmOfLength1, valueInCmOfLength2);
-    }
-
-    private static int compareValue(double value1, double value2) {
-        if (value1 > value2) {
-            return 1;
-        } else if (value1 < value2) {
-            return -1;
-        }
-        return 0;
     }
 }

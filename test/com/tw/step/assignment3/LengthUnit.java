@@ -1,14 +1,15 @@
 package com.tw.step.assignment3;
 
 public enum LengthUnit {
-    FEET, INCH, MM;
+    FEET(30), INCH(2.5), MM(0.1);
 
-    public double inCentimeters() {
-        switch (this.name()) {
-            case "FEET" : return 30;
-            case "INCH" : return 2.5;
-            case "MM" : return 0.1;
-        }
-        return 0;
+    private final double inInches;
+
+    LengthUnit(double inInch) {
+        this.inInches = inInch;
+    }
+
+    public double inCentimeters(double value) {
+       return value * this.inInches;
     }
 }
