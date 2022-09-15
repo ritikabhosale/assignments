@@ -19,9 +19,9 @@ public class Length {
         return new Length(value, unit);
     }
 
-    public int compare(Length length) {
+    public int compare(Length otherLength) {
         double valueInCmOfLength1 = this.unit.inCentimeters(this.value);
-        double valueInCmOfLength2 = length.unit.inCentimeters(length.value);
+        double valueInCmOfLength2 = otherLength.unit.inCentimeters(otherLength.value);
 
         if (valueInCmOfLength1 > valueInCmOfLength2) {
             return 1;
