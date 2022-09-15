@@ -20,19 +20,19 @@ class LengthTest {
     }
 
     @Test
-    void shouldCompareLengthInFeetAndInches() throws NegativeLengthException {
-        Length lengthInInches = Length.createLength(1, LengthUnit.INCH);
-        Length lengthInFeet = Length.createLength(2, LengthUnit.FEET);
+    void shouldCompareLengthInFeetAndInchesIfLengthInFeetIsLesser() throws NegativeLengthException {
+        Length lengthInFeet = Length.createLength(1, LengthUnit.FEET);
+        Length lengthInInches = Length.createLength(15, LengthUnit.INCH);
 
-        assertEquals(-1, lengthInInches.compare(lengthInFeet));
+        assertEquals(-1, lengthInFeet.compare(lengthInInches));
     }
 
     @Test
     void shouldCompareLengthInFeetAndInchesIfLengthIsEqual() throws NegativeLengthException {
-        Length lengthInInches = Length.createLength(12, LengthUnit.INCH);
         Length lengthInFeet = Length.createLength(1, LengthUnit.FEET);
+        Length lengthInInches = Length.createLength(12, LengthUnit.INCH);
 
-        assertEquals(0, lengthInInches.compare(lengthInFeet));
+        assertEquals(0, lengthInFeet.compare(lengthInInches));
     }
 
     @Test
@@ -53,9 +53,17 @@ class LengthTest {
 
     @Test
     void shouldCompareLengthInCentimetersAndMillimetersIfLengthIsSame() throws NegativeLengthException {
-        Length lengthInMillimeters = Length.createLength(10, LengthUnit.MM);
         Length lengthInCentimeters = Length.createLength(1, LengthUnit.CM);
+        Length lengthInMillimeters = Length.createLength(10, LengthUnit.MM);
 
-        assertEquals(0, lengthInMillimeters.compare(lengthInCentimeters));
+        assertEquals(0, lengthInCentimeters.compare(lengthInMillimeters));
+    }
+
+    @Test
+    void shouldCompareLengthInInchesAndMillimetersIfLengthIsSame() throws NegativeLengthException {
+        Length lengthInInches = Length.createLength(2, LengthUnit.INCH);
+        Length lengthInMillimeters = Length.createLength(50, LengthUnit.MM);
+
+        assertEquals(0, lengthInInches.compare(lengthInMillimeters));
     }
 }
