@@ -6,21 +6,23 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ParkingLot {
+    private final String lotId;
     private final ArrayList<Slot> slots;
 
-    private ParkingLot(ArrayList<Slot> slots) {
+    private ParkingLot(String lotId, ArrayList<Slot> slots) {
+        this.lotId = lotId;
         this.slots = slots;
     }
 
-    static ParkingLot createParkingLot(int capacity) {
-        ArrayList<Slot> slots = createSlots(capacity);
-        return new ParkingLot(slots);
+    static ParkingLot create(String lotId, int capacity) {
+        ArrayList<Slot> slots = createSlots(lotId, capacity);
+        return new ParkingLot(lotId, slots);
     }
 
-    private static ArrayList<Slot> createSlots(int capacity) {
+    private static ArrayList<Slot> createSlots(String lotId, int capacity) {
         ArrayList<Slot> slots = new ArrayList<>();
         for (int i = 0; i < capacity; i++) {
-            slots.add(new Slot(String.format("%d",i + 1)));
+            slots.add(new Slot(String.format("%sS%d", lotId, i + 1)));
         }
         return slots;
     }
@@ -40,6 +42,14 @@ public class ParkingLot {
         throw new LotNotEmptyException();
     }
 
+    public double percentageOfSpaceOccupied() {
+        double numberOfFilledSlots = this.slots.stream()
+                .filter(slot -> !slot.isAvailable())
+                .count();
+
+        return (numberOfFilledSlots / slots.size()) * 100;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,4 +64,5 @@ public class ParkingLot {
     public int hashCode() {
         return slots != null ? slots.hashCode() : 0;
     }
+
 }
