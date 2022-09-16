@@ -1,5 +1,7 @@
 package com.tw.step.assignment4;
 
+import com.tw.step.assignment4.exception.ParkingLotsNotEmptyException;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -32,5 +34,14 @@ public class ParkingLots {
     @Override
     public int hashCode() {
         return parkingLots != null ? parkingLots.hashCode() : 0;
+    }
+
+    public ParkingLot getSpaciousLot() throws ParkingLotsNotEmptyException {
+        for (ParkingLot parkingLot : this.parkingLots) {
+            if (parkingLot.percentageOfSpaceOccupied() < 100) {
+                return parkingLot;
+            }
+        }
+        throw new ParkingLotsNotEmptyException();
     }
 }

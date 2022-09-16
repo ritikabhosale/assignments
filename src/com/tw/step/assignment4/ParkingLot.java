@@ -1,6 +1,6 @@
 package com.tw.step.assignment4;
 
-import com.tw.step.assignment4.exception.LotNotEmptyException;
+import com.tw.step.assignment4.exception.ParkingLotNotEmptyException;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -27,19 +27,19 @@ public class ParkingLot {
         return slots;
     }
 
-    public Slot park(Vehicle vehicle) throws LotNotEmptyException {
+    public Slot park(Vehicle vehicle) throws ParkingLotNotEmptyException {
         Slot slot = getFirstEmptySlot();
         slot.park();
         return slot;
     }
 
-    private Slot getFirstEmptySlot() throws LotNotEmptyException {
+    private Slot getFirstEmptySlot() throws ParkingLotNotEmptyException {
         for (Slot slot : this.slots) {
             if (slot.isAvailable()) {
                 return slot;
             }
         }
-        throw new LotNotEmptyException();
+        throw new ParkingLotNotEmptyException();
     }
 
     public double percentageOfSpaceOccupied() {

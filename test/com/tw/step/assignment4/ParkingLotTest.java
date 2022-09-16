@@ -1,13 +1,13 @@
 package com.tw.step.assignment4;
 
-import com.tw.step.assignment4.exception.LotNotEmptyException;
+import com.tw.step.assignment4.exception.ParkingLotNotEmptyException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingLotTest {
     @Test
-    void shouldParkAVehicle() throws LotNotEmptyException {
+    void shouldParkAVehicle() throws ParkingLotNotEmptyException {
         ParkingLot parkingLot = ParkingLot.create("L1", 5);
         Vehicle vehicle = new Vehicle("123");
 
@@ -19,11 +19,11 @@ class ParkingLotTest {
         ParkingLot parkingLot = ParkingLot.create("L1", 0);
         Vehicle vehicle = new Vehicle("123");
 
-        assertThrows(LotNotEmptyException.class, () -> parkingLot.park(vehicle));
+        assertThrows(ParkingLotNotEmptyException.class, () -> parkingLot.park(vehicle));
     }
 
     @Test
-    void shouldReturnPercentageOfSpaceOccupied() throws LotNotEmptyException {
+    void shouldReturnPercentageOfSpaceOccupied() throws ParkingLotNotEmptyException {
         ParkingLot parkingLot = ParkingLot.create("L1", 1);
         parkingLot.park(new Vehicle("234"));
 
