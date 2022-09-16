@@ -4,9 +4,15 @@ import java.util.Objects;
 
 public class Slot {
     private final String slotId;
+    private boolean isAvailable;
 
     Slot(String slotId){
         this.slotId = slotId;
+        this.isAvailable = true;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
     @Override
@@ -22,5 +28,9 @@ public class Slot {
     @Override
     public int hashCode() {
         return slotId != null ? slotId.hashCode() : 0;
+    }
+
+    public void park() {
+        this.isAvailable = false;
     }
 }
