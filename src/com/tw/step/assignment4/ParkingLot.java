@@ -64,5 +64,4 @@ public class ParkingLot {
     public int hashCode() {
         return slots != null ? slots.hashCode() : 0;
     }
-
 }
