@@ -6,9 +6,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TemperatureUnitTest {
     @Test
-    void toBase() {
-        TemperatureUnit fahrenheit = TemperatureUnit.FAHRENHEIT;
-        assertEquals(100, fahrenheit.toBase(212));
+    void shouldReturnFahrenheitValueOf100DegreeCelsius() {
+        TemperatureUnit celsius = TemperatureUnit.CELSIUS;
+        assertEquals(212, celsius.toBase(100));
+    }
+
+    @Test
+    void shouldReturnFahrenheitValueOf50DegreeCelsius() {
+        TemperatureUnit celsius = TemperatureUnit.CELSIUS;
+        assertEquals(122, celsius.toBase(50));
     }
 
     @Test
@@ -21,7 +27,7 @@ class TemperatureUnitTest {
 
     @Test
     void shouldReturnBaseUnitOfVolume() {
-        TemperatureUnit celsius = TemperatureUnit.CELSIUS;
-        assertEquals(TemperatureUnit.CELSIUS, celsius.baseUnit());
+        TemperatureUnit celsius = TemperatureUnit.FAHRENHEIT;
+        assertEquals(TemperatureUnit.FAHRENHEIT, celsius.baseUnit());
     }
 }

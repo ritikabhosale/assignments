@@ -1,17 +1,19 @@
 package com.tw.step.assignment3.Units;
 
 public enum TemperatureUnit implements Unit {
-    CELSIUS(1), FAHRENHEIT(100/212d);
+    CELSIUS(9/5d, 32), FAHRENHEIT(1, 0);
 
-    private final double inBase;
+    private final double slope;
+    private final double constant;
 
-    TemperatureUnit(double inBase) {
-        this.inBase = inBase;
+    TemperatureUnit(double slope, double constant) {
+        this.slope = slope;
+        this.constant = constant;
     }
 
     @Override
     public double toBase(double value) {
-        return this.inBase * value;
+        return this.slope * value + constant;
     }
 
     @Override
@@ -21,6 +23,6 @@ public enum TemperatureUnit implements Unit {
 
     @Override
     public Unit baseUnit() {
-        return TemperatureUnit.CELSIUS;
+        return TemperatureUnit.FAHRENHEIT;
     }
 }

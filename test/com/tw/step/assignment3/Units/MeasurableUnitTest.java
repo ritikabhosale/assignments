@@ -98,8 +98,8 @@ class MeasurableUnitTest {
         MeasurableUnit length2 = MeasurableUnit.createMeasurableUnit(1, LengthUnit.INCH);
 
         assertEquals(MeasurableUnit.createMeasurableUnit(2, LengthUnit.INCH),length1.add(length2));
-    }
 
+    }
     @Test
     void shouldAddTwoDifferentUnitLengthsInInches() throws NegativeValueException, IncompatibleUnitsException {
         MeasurableUnit length1 = MeasurableUnit.createMeasurableUnit(2, LengthUnit.INCH);
