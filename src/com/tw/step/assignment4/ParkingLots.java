@@ -7,18 +7,20 @@ import java.util.Objects;
 
 public class ParkingLots {
     private final ArrayList<ParkingLot> parkingLots;
+    private final Notifier notifier;
 
-    private ParkingLots(ArrayList<ParkingLot> parkingLots) {
+    private ParkingLots(ArrayList<ParkingLot> parkingLots, Notifier notifier) {
         this.parkingLots = parkingLots;
+        this.notifier = notifier;
     }
 
-    public static ParkingLots create(int numberOfLots, int capacityOfEachLot) {
+    public static ParkingLots create(int numberOfLots, int capacityOfEachLot, Notifier notifier) {
         ArrayList<ParkingLot> parkingLots = new ArrayList<>();
 
         for (int i = 0; i < numberOfLots; i++) {
-            parkingLots.add(ParkingLot.create(String.format("L%d", i + 1), capacityOfEachLot));
+            parkingLots.add(ParkingLot.create(String.format("L%d", i + 1), capacityOfEachLot, notifier));
         }
-        return new ParkingLots(parkingLots);
+        return new ParkingLots(parkingLots, notifier);
     }
 
     @Override

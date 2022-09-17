@@ -12,9 +12,12 @@ public class Attendant implements Receiver {
 
     @Override
     public void receive(String lotId, double spaceOccupied) {
-        if (spaceOccupied < 20) {
-            System.out.println("Promote " + lotId);
-        }
+        System.out.println("Promote " + lotId);
+    }
+
+    @Override
+    public boolean receiveNotificationOn(String lotId, double spaceOccupied) {
+        return spaceOccupied <= 20;
     }
 
     public Slot park(Vehicle vehicle) throws ParkingLotsNotEmptyException, ParkingLotNotEmptyException {

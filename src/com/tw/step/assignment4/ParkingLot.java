@@ -8,15 +8,17 @@ import java.util.Objects;
 public class ParkingLot {
     private final String lotId;
     private final ArrayList<Slot> slots;
+    private final Notifier notifier;
 
-    private ParkingLot(String lotId, ArrayList<Slot> slots) {
+    private ParkingLot(String lotId, ArrayList<Slot> slots, Notifier notifier) {
         this.lotId = lotId;
         this.slots = slots;
+        this.notifier = notifier;
     }
 
-    static ParkingLot create(String lotId, int capacity) {
+    static ParkingLot create(String lotId, int capacity,  Notifier notifier) {
         ArrayList<Slot> slots = createSlots(lotId, capacity);
-        return new ParkingLot(lotId, slots);
+        return new ParkingLot(lotId, slots, notifier);
     }
 
     private static ArrayList<Slot> createSlots(String lotId, int capacity) {
@@ -30,6 +32,7 @@ public class ParkingLot {
     public Slot park(Vehicle vehicle) throws ParkingLotNotEmptyException {
         Slot slot = getFirstEmptySlot();
         slot.park();
+        notifier.notifyReceivers(this.lotId, this.percentageOfSpaceOccupied());
         return slot;
     }
 

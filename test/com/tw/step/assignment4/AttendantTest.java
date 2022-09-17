@@ -9,8 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class AttendantTest {
     @Test
     void shouldParkTheVehicle() throws ParkingLotsNotEmptyException, ParkingLotNotEmptyException {
-        ParkingLots parkingLots = ParkingLots.create(1, 1);
+        ParkingLots parkingLots = ParkingLots.create(1, 1, new Notifier());
         Vehicle vehicle = new Vehicle("123");
+
         Attendant attendant = new Attendant(parkingLots);
         Slot slot = new Slot("L1S1");
 
