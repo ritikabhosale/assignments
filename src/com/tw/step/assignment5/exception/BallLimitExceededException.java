@@ -1,18 +1,18 @@
 package com.tw.step.assignment5.exception;
 
-import com.tw.step.assignment5.Color;
+import com.tw.step.assignment5.BallColor;
 
 public class BallLimitExceededException extends BallCannotBeAddedException {
     private final int limit;
-    private final Color color;
+    private final BallColor ballColor;
 
-    public BallLimitExceededException(int limit, Color color) {
+    public BallLimitExceededException(int limit, BallColor ballColor) {
         this.limit = limit;
-        this.color = color;
+        this.ballColor = ballColor;
     }
 
     @Override
-    public java.lang.String getMessage() {
-        return java.lang.String.format("Cannot add more than %d %s balls", this.limit, this.color.name());
+    public String getMessage() {
+        return String.format("Cannot add more than %d %s balls", this.limit, this.ballColor);
     }
 }

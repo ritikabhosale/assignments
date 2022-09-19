@@ -1,13 +1,13 @@
 package com.tw.step.assignment5;
 
 public class Ball {
-    private final Color color;
+    private final BallColor ballColor;
 
-    public Ball(Color color) {
-        this.color = color;
+    public Ball(BallColor ballColor) {
+        this.ballColor = ballColor;
     }
 
-    public Color getColor() {
-        return color;
+    public BallColor getColor() {
+        return ballColor;
     }
 }

@@ -10,7 +10,7 @@ class BagTest {
     @Test
     void shouldAddABallInBag() throws BallCannotBeAddedException {
         Bag bag = new Bag();
-        Ball ball1 = new Ball(Color.GREEN);
+        Ball ball1 = new Ball(BallColor.GREEN);
 
         assertTrue(bag.add(ball1));
     }
@@ -18,10 +18,10 @@ class BagTest {
     @Test
     void shouldNotAddMoreThanThreeGreenBalls() throws BallCannotBeAddedException {
         Bag bag = new Bag();
-        Ball greenBall1 = new Ball(Color.GREEN);
-        Ball greenBall2 = new Ball(Color.GREEN);
-        Ball greenBall3 = new Ball(Color.GREEN);
-        Ball greenBall4 = new Ball(Color.GREEN);
+        Ball greenBall1 = new Ball(BallColor.GREEN);
+        Ball greenBall2 = new Ball(BallColor.GREEN);
+        Ball greenBall3 = new Ball(BallColor.GREEN);
+        Ball greenBall4 = new Ball(BallColor.GREEN);
 
         bag.add(greenBall1);
         bag.add(greenBall2);
@@ -33,19 +33,19 @@ class BagTest {
     @Test
     void shouldThrowExceptionOnAdding13thBall() throws BallCannotBeAddedException {
         Bag bag = new Bag();
-        Ball blueBall1 = new Ball(Color.BLUE);
-        Ball blueBall2 = new Ball(Color.BLUE);
-        Ball blueBall3 = new Ball(Color.BLUE);
-        Ball blueBall4 = new Ball(Color.BLUE);
-        Ball blueBall5 = new Ball(Color.BLUE);
-        Ball blueBall6 = new Ball(Color.BLUE);
-        Ball blueBall7 = new Ball(Color.BLUE);
-        Ball blueBall8 = new Ball(Color.BLUE);
-        Ball blueBall9 = new Ball(Color.BLUE);
-        Ball blueBall10 = new Ball(Color.BLUE);
-        Ball blueBall11 = new Ball(Color.BLUE);
-        Ball blueBall12 = new Ball(Color.BLUE);
-        Ball blueBall13 = new Ball(Color.BLUE);
+        Ball blueBall1 = new Ball(BallColor.BLUE);
+        Ball blueBall2 = new Ball(BallColor.BLUE);
+        Ball blueBall3 = new Ball(BallColor.BLUE);
+        Ball blueBall4 = new Ball(BallColor.BLUE);
+        Ball blueBall5 = new Ball(BallColor.BLUE);
+        Ball blueBall6 = new Ball(BallColor.BLUE);
+        Ball blueBall7 = new Ball(BallColor.BLUE);
+        Ball blueBall8 = new Ball(BallColor.BLUE);
+        Ball blueBall9 = new Ball(BallColor.BLUE);
+        Ball blueBall10 = new Ball(BallColor.BLUE);
+        Ball blueBall11 = new Ball(BallColor.BLUE);
+        Ball blueBall12 = new Ball(BallColor.BLUE);
+        Ball blueBall13 = new Ball(BallColor.BLUE);
 
         bag.add(blueBall1);
         bag.add(blueBall2);
@@ -66,7 +66,7 @@ class BagTest {
     @Test
     void shouldNotAddRedBallWhenGreenBallIsAbsent() {
         Bag bag = new Bag();
-        Ball redBall1 = new Ball(Color.RED);
+        Ball redBall1 = new Ball(BallColor.RED);
 
         assertThrows(IncompatibleRedAndGreenBallCountException.class, () -> bag.add(redBall1));
     }
@@ -74,17 +74,17 @@ class BagTest {
     @Test
     void shouldNotAddMoreThan40PercentBallsToBeYellow() {
         Bag bag = new Bag();
-        Ball yellowBall1 = new Ball(Color.YELLOW);
+        Ball yellowBall1 = new Ball(BallColor.YELLOW);
 
-        assertThrows(AddingYellowBallException.class, () -> bag.add(yellowBall1));
+        assertThrows(BallCountCannotBeMoreThan40PercentException.class, () -> bag.add(yellowBall1));
     }
 
     @Test
     void shouldAddAYellowBall() throws BallCannotBeAddedException {
         Bag bag = new Bag();
-        Ball yellowBall1 = new Ball(Color.YELLOW);
-        Ball blueBall1 = new Ball(Color.BLUE);
-        Ball blueBall2 = new Ball(Color.BLUE);
+        Ball yellowBall1 = new Ball(BallColor.YELLOW);
+        Ball blueBall1 = new Ball(BallColor.BLUE);
+        Ball blueBall2 = new Ball(BallColor.BLUE);
 
         bag.add(blueBall1);
         bag.add(blueBall2);
@@ -95,8 +95,8 @@ class BagTest {
     @Test
     void shouldNotAddBlueBallWhenBlackIsPresent() throws BallCannotBeAddedException {
         Bag bag = new Bag();
-        Ball blackBall = new Ball(Color.BLACK);
-        Ball blueBall = new Ball(Color.BLUE);
+        Ball blackBall = new Ball(BallColor.BLACK);
+        Ball blueBall = new Ball(BallColor.BLUE);
 
         bag.add(blackBall);
 
@@ -106,8 +106,8 @@ class BagTest {
     @Test
     void shouldNotAddBlackBallWhenBlueIsPresent() throws BallCannotBeAddedException {
         Bag bag = new Bag();
-        Ball blackBall = new Ball(Color.BLACK);
-        Ball blueBall = new Ball(Color.BLUE);
+        Ball blackBall = new Ball(BallColor.BLACK);
+        Ball blueBall = new Ball(BallColor.BLUE);
 
         bag.add(blueBall);
 
@@ -117,8 +117,8 @@ class BagTest {
     @Test
     void shouldAddBlackBallWhenBlueIsNotPresent() throws BallCannotBeAddedException {
         Bag bag = new Bag();
-        Ball blackBall = new Ball(Color.BLACK);
-        Ball greenBall = new Ball(Color.GREEN);
+        Ball blackBall = new Ball(BallColor.BLACK);
+        Ball greenBall = new Ball(BallColor.GREEN);
 
         bag.add(greenBall);
 
