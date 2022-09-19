@@ -2,11 +2,11 @@ package com.tw.step.assignment5.exception;
 
 import com.tw.step.assignment5.Color;
 
-public class BagLimitExceededException extends Exception{
+public class BallLimitExceededException extends Exception{
     private final int limit;
     private final Color color;
 
-    public BagLimitExceededException(int limit, Color color) {
+    public BallLimitExceededException(int limit, Color color) {
         this.limit = limit;
         this.color = color;
     }
