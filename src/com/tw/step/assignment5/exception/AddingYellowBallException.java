@@ -1,6 +1,6 @@
 package com.tw.step.assignment5.exception;
 
-public class AddingYellowBallException extends BallCannotBeAddedException{
+public class AddingYellowBallException extends BallCannotBeAddedException {
     private final double percentageOfYellowBalls;
 
     public AddingYellowBallException(double percentageOfYellowBalls) {
