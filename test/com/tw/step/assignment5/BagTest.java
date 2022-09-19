@@ -1,5 +1,6 @@
 package com.tw.step.assignment5;
 
+import com.tw.step.assignment5.exception.AddingYellowBallException;
 import com.tw.step.assignment5.exception.BagCapacityExceededException;
 import com.tw.step.assignment5.exception.BallLimitExceededException;
 import com.tw.step.assignment5.exception.IncompatibleRedAndGreenBallCountException;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BagTest {
 
     @Test
-    void shouldAddABallInBag() throws BallLimitExceededException, BagCapacityExceededException, IncompatibleRedAndGreenBallCountException {
+    void shouldAddABallInBag() throws BallLimitExceededException, BagCapacityExceededException, IncompatibleRedAndGreenBallCountException, AddingYellowBallException {
         Bag bag = new Bag();
         Ball ball1 = new Ball("b1", Color.GREEN);
 
@@ -18,7 +19,7 @@ class BagTest {
     }
 
     @Test
-    void shouldNotAddMoreThanThreeGreenBalls() throws BallLimitExceededException, BagCapacityExceededException, IncompatibleRedAndGreenBallCountException {
+    void shouldNotAddMoreThanThreeGreenBalls() throws BallLimitExceededException, BagCapacityExceededException, IncompatibleRedAndGreenBallCountException, AddingYellowBallException {
         Bag bag = new Bag();
         Ball greenBall1 = new Ball("b1", Color.GREEN);
         Ball greenBall2 = new Ball("b2", Color.GREEN);
@@ -33,7 +34,7 @@ class BagTest {
     }
 
     @Test
-    void shouldThrowExceptionOnAdding13thBall() throws BallLimitExceededException, BagCapacityExceededException, IncompatibleRedAndGreenBallCountException {
+    void shouldThrowExceptionOnAdding13thBall() throws BallLimitExceededException, BagCapacityExceededException, IncompatibleRedAndGreenBallCountException, AddingYellowBallException {
         Bag bag = new Bag();
         Ball blueBall1 = new Ball("b1", Color.BLUE);
         Ball blueBall2 = new Ball("b2", Color.BLUE);
@@ -71,5 +72,26 @@ class BagTest {
         Ball redBall1 = new Ball("b1", Color.RED);
 
         assertThrows(IncompatibleRedAndGreenBallCountException.class, () -> bag.add(redBall1));
+    }
+
+    @Test
+    void shouldNotAddMoreThan40PercentBallsToBeYellow() {
+        Bag bag = new Bag();
+        Ball yellowBall1 = new Ball("b1", Color.YELLOW);
+
+        assertThrows(AddingYellowBallException.class, () -> bag.add(yellowBall1));
+    }
+
+    @Test
+    void shouldAddAYellowBall() throws AddingYellowBallException, IncompatibleRedAndGreenBallCountException, BallLimitExceededException, BagCapacityExceededException {
+        Bag bag = new Bag();
+        Ball yellowBall1 = new Ball("b1", Color.YELLOW);
+        Ball blueBall1 = new Ball("b2", Color.BLUE);
+        Ball blueBall2 = new Ball("b3", Color.BLUE);
+
+        bag.add(blueBall1);
+        bag.add(blueBall2);
+
+        assertTrue(bag.add(yellowBall1));
     }
 }
