@@ -20,8 +20,9 @@ public class Attendant implements Receiver {
         return spaceOccupied <= 20;
     }
 
-    public Slot park(Vehicle vehicle) throws ParkingLotsNotEmptyException, ParkingLotNotEmptyException {
+    public boolean park(Vehicle vehicle) throws ParkingLotsNotEmptyException, ParkingLotNotEmptyException {
         ParkingLot parkingLot = parkingLots.getSpaciousLot();
-        return parkingLot.park(vehicle);
+        parkingLot.park(vehicle);
+        return true;
     }
 }

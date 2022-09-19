@@ -13,8 +13,19 @@ class AttendantTest {
         Vehicle vehicle = new Vehicle("123");
 
         Attendant attendant = new Attendant(parkingLots);
-        Slot slot = new Slot("L1S1");
 
-        assertEquals(slot, attendant.park(vehicle));
+        assertTrue(attendant.park(vehicle));
+    }
+
+    @Test
+    void shouldNotifyOnDesiredCondition() throws ParkingLotsNotEmptyException, ParkingLotNotEmptyException {
+        Notifier notifier = new Notifier();
+        ParkingLots parkingLots = ParkingLots.create(1, 5, notifier);
+        Vehicle vehicle = new Vehicle("123");
+
+        Attendant attendant = new Attendant(parkingLots);
+        notifier.register(attendant);
+
+        assertTrue(attendant.park(vehicle));
     }
 }
