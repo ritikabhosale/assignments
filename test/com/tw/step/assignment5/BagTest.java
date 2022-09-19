@@ -60,7 +60,7 @@ class BagTest {
         bag.add(blueBall11);
         bag.add(blueBall12);
 
-        assertThrows(BagCapacityExceededException.class, () -> bag.add(blueBall13));
+        assertThrows(BagLimitExceededException.class, () -> bag.add(blueBall13));
     }
 
     @Test
@@ -112,5 +112,16 @@ class BagTest {
         bag.add(blueBall);
 
         assertThrows(BallCannotBePresentTogetherException.class, () -> bag.add(blackBall));
+    }
+
+    @Test
+    void shouldAddBlackBallWhenBlueIsNotPresent() throws BallCannotBeAddedException {
+        Bag bag = new Bag();
+        Ball blackBall = new Ball(Color.BLACK);
+        Ball greenBall = new Ball(Color.GREEN);
+
+        bag.add(greenBall);
+
+        assertTrue(bag.add(blackBall));
     }
 }

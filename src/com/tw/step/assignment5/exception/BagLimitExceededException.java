@@ -1,9 +1,9 @@
 package com.tw.step.assignment5.exception;
 
-public class BagCapacityExceededException extends BallCannotBeAddedException {
+public class BagLimitExceededException extends BallCannotBeAddedException {
     private final int maxQuantityOfBalls;
 
-    public BagCapacityExceededException(int maxQuantityOfBalls) {
+    public BagLimitExceededException(int maxQuantityOfBalls) {
         this.maxQuantityOfBalls = maxQuantityOfBalls;
     }
 

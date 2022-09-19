@@ -2,7 +2,7 @@ package com.tw.step.assignment5.exception;
 
 import com.tw.step.assignment5.Color;
 
-public class BallLimitExceededException extends BallCannotBeAddedException{
+public class BallLimitExceededException extends BallCannotBeAddedException {
     private final int limit;
     private final Color color;
 
