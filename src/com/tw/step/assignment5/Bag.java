@@ -1,9 +1,6 @@
 package com.tw.step.assignment5;
 
-import com.tw.step.assignment5.exception.AddingYellowBallException;
-import com.tw.step.assignment5.exception.BagCapacityExceededException;
-import com.tw.step.assignment5.exception.BallLimitExceededException;
-import com.tw.step.assignment5.exception.IncompatibleRedAndGreenBallCountException;
+import com.tw.step.assignment5.exception.*;
 
 import java.util.HashSet;
 
@@ -16,7 +13,7 @@ public class Bag {
         this.balls = new HashSet<Ball>();
     }
 
-    public boolean add(Ball ball) throws BallLimitExceededException, BagCapacityExceededException, IncompatibleRedAndGreenBallCountException, AddingYellowBallException {
+    public boolean add(Ball ball) throws BallCannotBeAddedException {
         if (this.balls.size() >= this.maxQuantityOfBalls) {
             throw new BagCapacityExceededException(this.maxQuantityOfBalls);
         }
@@ -26,7 +23,7 @@ public class Bag {
         return this.balls.add(ball);
     }
 
-    private void validateBallToAdd(Ball ball) throws BallLimitExceededException, IncompatibleRedAndGreenBallCountException, AddingYellowBallException {
+    private void validateBallToAdd(Ball ball) throws BallCannotBeAddedException {
         if (ball.getColor() == Color.GREEN && this.countOf(Color.GREEN) >= 3) {
             throw new BallLimitExceededException(3, Color.GREEN);
         }
@@ -42,10 +39,23 @@ public class Bag {
         if (ball.getColor() == Color.YELLOW) {
             int countOfTotalBallsAfterAddingAYellowBall = this.balls.size() + 1;
             int countOfYellowAfterAddingAYellowBall = this.countOf(Color.YELLOW) + 1;
-            if (countOfYellowAfterAddingAYellowBall * 100.0 / countOfTotalBallsAfterAddingAYellowBall > 40) {
-                throw new AddingYellowBallException();
+            double percentageOfYellow = countOfYellowAfterAddingAYellowBall * 100.0 / countOfTotalBallsAfterAddingAYellowBall;
+            if (percentageOfYellow > 40) {
+                throw new AddingYellowBallException(percentageOfYellow);
             }
         }
+
+        if (ball.getColor() == Color.BLACK && this.isColorPresent(Color.BLUE)) {
+            throw new BallCannotBePresentTogetherException(Color.BLACK, Color.BLUE);
+        }
+
+        if (ball.getColor() == Color.BLUE && this.isColorPresent(Color.BLACK)) {
+            throw new BallCannotBePresentTogetherException(Color.BLUE, Color.BLACK);
+        }
+    }
+
+    private boolean isColorPresent(Color color) {
+        return this.countOf(color) > 0;
     }
 
     private int countOf(Color color) {

@@ -1,10 +1,10 @@
 package com.tw.step.assignment5;
 
 public class Ball {
-    private final String id;
+    private final java.lang.String id;
     private final Color color;
 
-    public Ball(String id, Color color) {
+    public Ball(java.lang.String id, Color color) {
         this.id = id;
         this.color = color;
     }

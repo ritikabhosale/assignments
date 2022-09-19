@@ -1,6 +1,6 @@
 package com.tw.step.assignment5.exception;
 
-public class IncompatibleRedAndGreenBallCountException extends Exception{
+public class IncompatibleRedAndGreenBallCountException extends BallCannotBeAddedException{
     private final int countOfGreen;
     private final int countOfRed;
 

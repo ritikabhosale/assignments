@@ -1,9 +1,6 @@
 package com.tw.step.assignment5;
 
-import com.tw.step.assignment5.exception.AddingYellowBallException;
-import com.tw.step.assignment5.exception.BagCapacityExceededException;
-import com.tw.step.assignment5.exception.BallLimitExceededException;
-import com.tw.step.assignment5.exception.IncompatibleRedAndGreenBallCountException;
+import com.tw.step.assignment5.exception.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BagTest {
 
     @Test
-    void shouldAddABallInBag() throws BallLimitExceededException, BagCapacityExceededException, IncompatibleRedAndGreenBallCountException, AddingYellowBallException {
+    void shouldAddABallInBag() throws BallCannotBeAddedException {
         Bag bag = new Bag();
         Ball ball1 = new Ball("b1", Color.GREEN);
 
@@ -19,7 +16,7 @@ class BagTest {
     }
 
     @Test
-    void shouldNotAddMoreThanThreeGreenBalls() throws BallLimitExceededException, BagCapacityExceededException, IncompatibleRedAndGreenBallCountException, AddingYellowBallException {
+    void shouldNotAddMoreThanThreeGreenBalls() throws BallCannotBeAddedException {
         Bag bag = new Bag();
         Ball greenBall1 = new Ball("b1", Color.GREEN);
         Ball greenBall2 = new Ball("b2", Color.GREEN);
@@ -34,7 +31,7 @@ class BagTest {
     }
 
     @Test
-    void shouldThrowExceptionOnAdding13thBall() throws BallLimitExceededException, BagCapacityExceededException, IncompatibleRedAndGreenBallCountException, AddingYellowBallException {
+    void shouldThrowExceptionOnAdding13thBall() throws BallCannotBeAddedException {
         Bag bag = new Bag();
         Ball blueBall1 = new Ball("b1", Color.BLUE);
         Ball blueBall2 = new Ball("b2", Color.BLUE);
@@ -83,7 +80,7 @@ class BagTest {
     }
 
     @Test
-    void shouldAddAYellowBall() throws AddingYellowBallException, IncompatibleRedAndGreenBallCountException, BallLimitExceededException, BagCapacityExceededException {
+    void shouldAddAYellowBall() throws BallCannotBeAddedException {
         Bag bag = new Bag();
         Ball yellowBall1 = new Ball("b1", Color.YELLOW);
         Ball blueBall1 = new Ball("b2", Color.BLUE);
@@ -93,5 +90,27 @@ class BagTest {
         bag.add(blueBall2);
 
         assertTrue(bag.add(yellowBall1));
+    }
+
+    @Test
+    void shouldNotAddBlueBallWhenBlackIsPresent() throws BallCannotBeAddedException {
+        Bag bag = new Bag();
+        Ball blackBall = new Ball("b1", Color.BLACK);
+        Ball blueBall = new Ball("b2", Color.BLUE);
+
+        bag.add(blackBall);
+
+        assertThrows(BallCannotBePresentTogetherException.class, () -> bag.add(blueBall));
+    }
+
+    @Test
+    void shouldNotAddBlackBallWhenBlueIsPresent() throws BallCannotBeAddedException {
+        Bag bag = new Bag();
+        Ball blackBall = new Ball("b1", Color.BLACK);
+        Ball blueBall = new Ball("b2", Color.BLUE);
+
+        bag.add(blueBall);
+
+        assertThrows(BallCannotBePresentTogetherException.class, () -> bag.add(blackBall));
     }
 }
